@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="id">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>
+   Dashboard Kuota Magang | Dinas Pertanian dan Ketahanan Pangan Bantul
+  </title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet"/>
+  <link href="style.css" rel="stylesheet"/>
+ </head>
+ <body>
+  <div class="app-shell">
+   <aside class="sidebar" id="sidebar">
+    <div class="brand">
+     <div class="brand-mark">
+      <img src="images/logo-dinas.jpeg" alt="Logo Dinas Pertanian dan Ketahanan Pangan Bantul"/>
+     </div>
+     <div>
+      <strong>
+       Dashboard Magang
+      </strong>
+      <small>
+       Dashboard Admin
+      </small>
+     </div>
+    </div>
+    <div class="sidebar-label">
+     MENU UTAMA
+    </div>
+    <nav class="nav flex-column" id="mainNav">
+     <button class="nav-link active" data-page="dashboard">
+      <i class="bi bi-grid-1x2">
+      </i>
+      Dashboard
+     </button>
+     <button class="nav-link" data-page="periods">
+      <i class="bi bi-calendar3">
+      </i>
+      Periode &amp; Kuota
+     </button>
+     <button class="nav-link" data-page="participants">
+      <i class="bi bi-people">
+      </i>
+      Data Peserta
+     </button>
+     <button class="nav-link" data-page="reports">
+      <i class="bi bi-file-earmark-bar-graph">
+      </i>
+      Laporan
+     </button>
+    </nav>
+    <div class="sidebar-bottom">
+     <div class="demo-note">
+      <i class="bi bi-info-circle">
+      </i>
+      <span>
+       Mode prototipe
+       <br/>
+       <small>
+        Data contoh tersimpan di browser ini.
+       </small>
+      </span>
+     </div>
+     <button class="nav-link" id="resetDemo">
+      <i class="bi bi-arrow-counterclockwise">
+      </i>
+      Reset data contoh
+     </button>
+    </div>
+   </aside>
+   <main class="main-content">
+    <header class="topbar">
+     <button aria-label="Buka menu" class="icon-btn mobile-menu" id="mobileMenu">
+      <i class="bi bi-list">
+      </i>
+     </button>
+     <div class="breadcrumb-line">
+      <span>
+       Dashboard Magang
+      </span>
+      <i class="bi bi-chevron-right">
+      </i>
+      <strong id="pageCrumb">
+       Dashboard
+      </strong>
+     </div>
+     <div class="topbar-right">
+      <span class="status-chip">
+       <span>
+       </span>
+       Prototipe
+      </span>
+      <div class="avatar">
+       AD
+      </div>
+      <div class="admin-label">
+       <strong>
+        Admin Dinas
+       </strong>
+       <small>
+        Administrator
+       </small>
+      </div>
+     </div>
+    </header>
+    <section class="page active" id="page-dashboard">
+     <div class="page-heading">
+      <div>
+       <p class="eyebrow">
+        RINGKASAN SISTEM
+       </p>
+       <h1>
+        Dashboard
+       </h1>
+       <p class="muted">
+        Pantau kuota dan pengelolaan peserta magang dalam satu tempat.
+       </p>
+      </div>
+      <div class="heading-actions">
+       <span class="date-label">
+        <i class="bi bi-calendar-week">
+        </i>
+        <span id="todayLabel">
+        </span>
+       </span>
+       <button class="btn btn-green" id="quickAdd">
+        <i class="bi bi-plus-lg">
+        </i>
+        Tambah Peserta
+       </button>
+      </div>
+     </div>
+     <div class="alert alert-warning demo-alert">
+      <i class="bi bi-exclamation-triangle-fill">
+      </i>
+      <div>
+       <strong>
+        Data demonstrasi
+       </strong>
+       <br/>
+       Angka dan nama pada dashboard ini adalah data fiktif. Jangan masukkan data pribadi peserta asli sebelum mendapat izin dan menyiapkan penyimpanan yang aman.
+      </div>
+     </div>
+     <div class="stats-grid">
+      <article class="stat-card">
+       <div class="stat-icon icon-green">
+        <i class="bi bi-people">
+        </i>
+       </div>
+       <div class="stat-caption">
+        Total Kuota
+       </div>
+       <div class="stat-number" id="statQuota">
+        30
+       </div>
+       <div class="stat-foot">
+        <span class="dot green-dot">
+        </span>
+        Kapasitas seluruh periode
+       </div>
+      </article>
+      <article class="stat-card">
+       <div class="stat-icon icon-blue">
+        <i class="bi bi-person-check">
+        </i>
+       </div>
+       <div class="stat-caption">
+        Peserta Diterima
+       </div>
+       <div class="stat-number" id="statAccepted">
+        18
+       </div>
+       <div class="stat-foot">
+        Terhitung dari status diterima
+       </div>
+      </article>
+      <article class="stat-card">
+       <div class="stat-icon icon-amber">
+        <i class="bi bi-hourglass-split">
+        </i>
+       </div>
+       <div class="stat-caption">
+        Menunggu
+       </div>
+       <div class="stat-number" id="statPending">
+        4
+       </div>
+       <div class="stat-foot">
+        Perlu ditinjau admin
+       </div>
+      </article>
+      <article class="stat-card">
+       <div class="stat-icon icon-purple">
+        <i class="bi bi-pie-chart">
+        </i>
+       </div>
+       <div class="stat-caption">
+        Sisa Kuota
+       </div>
+       <div class="stat-number" id="statRemaining">
+        12
+       </div>
+       <div class="stat-foot" id="remainingFoot">
+        40% kapasitas masih tersedia
+       </div>
+      </article>
+     </div>
+     <div class="content-grid">
+      <article class="panel">
+       <div class="panel-heading">
+        <div>
+         <h2>
+          Penggunaan Kuota
+         </h2>
+         <p>
+          Jumlah peserta diterima dibandingkan kuota.
+         </p>
+        </div>
+        <select aria-label="Pilih periode" class="form-select form-select-sm period-select" id="quotaPeriodSelect">
+        </select>
+       </div>
+       <div class="quota-summary">
+        <div>
+         <span class="muted">
+          Kuota terisi
+         </span>
+         <strong id="quotaUsed">
+          6 dari 10
+         </strong>
+        </div>
+        <div class="text-end">
+         <span class="muted">
+          Keterisian
+         </span>
+         <strong id="quotaPercent">
+          60%
+         </strong>
+        </div>
+       </div>
+       <div class="progress quota-progress">
+        <div class="progress-bar" id="quotaProgress" style="width:60%">
+        </div>
+       </div>
+       <div class="legend-row">
+        <span>
+         <i class="legend-dot filled">
+         </i>
+         Diterima
+        </span>
+        <span>
+         <i class="legend-dot available">
+         </i>
+         Tersedia
+        </span>
+       </div>
+       <div class="mini-divider">
+       </div>
+       <div class="panel-heading compact">
+        <div>
+         <h3>
+          Ringkasan per Periode
+         </h3>
+         <p>
+          Kuota dan penerimaan peserta.
+         </p>
+        </div>
+       </div>
+       <div class="period-summary" id="periodSummary">
+       </div>
+      </article>
+      <article class="panel">
+       <div class="panel-heading">
+        <div>
+         <h2>
+          Status Peserta
+         </h2>
+         <p>
+          Komposisi seluruh data peserta.
+         </p>
+        </div>
+        <i class="bi bi-three-dots">
+        </i>
+       </div>
+       <div class="status-chart-wrap">
+        <canvas aria-label="Grafik status peserta" id="statusChart">
+        </canvas>
+        <div class="chart-center">
+         <strong id="chartTotal">
+          24
+         </strong>
+         <span>
+          Total peserta
+         </span>
+        </div>
+       </div>
+       <div class="status-legend" id="statusLegend">
+       </div>
+      </article>
+     </div>
+     <article class="panel table-panel">
+      <div class="panel-heading">
+       <div>
+        <h2>
+         Peserta Terbaru
+        </h2>
+        <p>
+         Data peserta yang terakhir ditambahkan atau diubah.
+        </p>
+       </div>
+       <button class="btn btn-outline-secondary btn-sm" data-go="participants">
+        Lihat semua
+        <i class="bi bi-arrow-right">
+        </i>
+       </button>
+      </div>
+      <div class="table-responsive">
+       <table class="table align-middle">
+        <thead>
+         <tr>
+          <th>
+           Nama Peserta
+          </th>
+          <th>
+           Perguruan Tinggi
+          </th>
+          <th>
+           Periode
+          </th>
+          <th>
+           Status
+          </th>
+          <th>
+          </th>
+         </tr>
+        </thead>
+        <tbody id="recentTable">
+        </tbody>
+       </table>
+      </div>
+     </article>
+    </section>
+    <section class="page" id="page-periods">
+     <div class="page-heading">
+      <div>
+       <p class="eyebrow">
+        PENGELOLAAN
+       </p>
+       <h1>
+        Periode &amp; Kuota
+       </h1>
+       <p class="muted">
+        Atur periode magang dan kapasitas penerimaan.
+       </p>
+      </div>
+      <button class="btn btn-green" id="addPeriod">
+       <i class="bi bi-plus-lg">
+       </i>
+       Tambah Periode
+      </button>
+     </div>
+     <div class="alert alert-info">
+      <i class="bi bi-info-circle-fill">
+      </i>
+      <div>
+       Kuota merupakan kapasitas yang ditentukan admin. Sistem menghitung peserta diterima per periode dan mencegah penerimaan melebihi kuota.
+      </div>
+     </div>
+     <article class="panel table-panel">
+      <div class="panel-heading">
+       <div>
+        <h2>
+         Daftar Periode
+        </h2>
+        <p id="periodCount">
+         0 periode
+        </p>
+       </div>
+       <div class="search-wrap">
+        <i class="bi bi-search">
+        </i>
+        <input class="form-control" id="periodSearch" placeholder="Cari periode..."/>
+       </div>
+      </div>
+      <div class="table-responsive">
+       <table class="table align-middle">
+        <thead>
+         <tr>
+          <th>
+           Periode
+          </th>
+          <th>
+           Tanggal Mulai
+          </th>
+          <th>
+           Tanggal Selesai
+          </th>
+          <th>
+           Kuota
+          </th>
+          <th>
+           Diterima
+          </th>
+          <th>
+           Sisa
+          </th>
+          <th>
+           Status
+          </th>
+          <th>
+           Aksi
+          </th>
+         </tr>
+        </thead>
+        <tbody id="periodTable">
+        </tbody>
+       </table>
+      </div>
+     </article>
+    </section>
+    <section class="page" id="page-participants">
+     <div class="page-heading">
+      <div>
+       <p class="eyebrow">
+        DATA DAN ADMINISTRASI
+       </p>
+       <h1>
+        Data Peserta
+       </h1>
+       <p class="muted">
+        Kelola data peserta, periode, dan status penerimaan.
+       </p>
+      </div>
+      <button class="btn btn-green" id="addParticipant">
+       <i class="bi bi-plus-lg">
+       </i>
+       Tambah Peserta
+      </button>
+     </div>
+     <div class="stats-strip">
+      <div>
+       <span>
+        Total data
+       </span>
+       <strong id="participantTotal">
+        0
+       </strong>
+      </div>
+      <div>
+       <span>
+        Diterima
+       </span>
+       <strong id="participantAccepted">
+        0
+       </strong>
+      </div>
+      <div>
+       <span>
+        Menunggu
+       </span>
+       <strong id="participantPending">
+        0
+       </strong>
+      </div>
+      <div>
+       <span>
+        Selesai
+       </span>
+       <strong id="participantDone">
+        0
+       </strong>
+      </div>
+     </div>
+     <article class="panel table-panel">
+      <div class="filters-row">
+       <div class="search-wrap wide-search">
+        <i class="bi bi-search">
+        </i>
+        <input class="form-control" id="participantSearch" placeholder="Cari nama, kampus, atau jurusan..."/>
+       </div>
+       <select class="form-select filter-select" id="participantPeriodFilter">
+        <option value="">
+         Semua periode
+        </option>
+       </select>
+       <select class="form-select filter-select" id="participantStatusFilter">
+        <option value="">
+         Semua status
+        </option>
+        <option>
+         Menunggu
+        </option>
+        <option>
+         Diterima
+        </option>
+        <option>
+         Ditolak
+        </option>
+        <option>
+         Selesai
+        </option>
+       </select>
+       <button class="btn btn-outline-secondary" id="importBtn">
+        <i class="bi bi-arrow-down-circle">
+        </i>
+        Impor CSV
+       </button>
+       <button class="btn btn-outline-secondary" id="exportCsv">
+        <i class="bi bi-arrow-up-circle">
+        </i>
+        Ekspor CSV
+       </button>
+       <input accept=".csv,text/csv" hidden="" id="csvFile" type="file"/>
+      </div>
+      <div class="table-responsive">
+       <table class="table align-middle">
+        <thead>
+         <tr>
+          <th>
+           Nama Peserta
+          </th>
+          <th>
+           Perguruan Tinggi
+          </th>
+          <th>
+           Jurusan
+          </th>
+          <th>
+           Periode
+          </th>
+          <th>
+           Status
+          </th>
+          <th>
+           Aksi
+          </th>
+         </tr>
+        </thead>
+        <tbody id="participantTable">
+        </tbody>
+       </table>
+      </div>
+      <div class="table-footer">
+       <span id="tableResultCount">
+        0 data
+       </span>
+       <span>
+        Data demo disimpan di browser ini
+       </span>
+      </div>
+     </article>
+    </section>
+    <section class="page" id="page-reports">
+     <div class="page-heading">
+      <div>
+       <p class="eyebrow">
+        REKAPITULASI
+       </p>
+       <h1>
+        Laporan
+       </h1>
+       <p class="muted">
+        Ringkasan penerimaan peserta berdasarkan periode.
+       </p>
+      </div>
+      <button class="btn btn-green" id="reportExport">
+       <i class="bi bi-file-earmark-arrow-down">
+       </i>
+       Unduh CSV
+      </button>
+     </div>
+     <div class="stats-grid report-stats">
+      <article class="stat-card">
+       <div class="stat-caption">
+        Total Periode
+       </div>
+       <div class="stat-number" id="reportPeriods">
+        0
+       </div>
+      </article>
+      <article class="stat-card">
+       <div class="stat-caption">
+        Total Kuota
+       </div>
+       <div class="stat-number" id="reportQuota">
+        0
+       </div>
+      </article>
+      <article class="stat-card">
+       <div class="stat-caption">
+        Diterima
+       </div>
+       <div class="stat-number" id="reportAccepted">
+        0
+       </div>
+      </article>
+      <article class="stat-card">
+       <div class="stat-caption">
+        Sisa Kuota
+       </div>
+       <div class="stat-number" id="reportRemaining">
+        0
+       </div>
+      </article>
+     </div>
+     <article class="panel table-panel">
+      <div class="panel-heading">
+       <div>
+        <h2>
+         Rekapitulasi Periode
+        </h2>
+        <p>
+         Gunakan laporan ini untuk evaluasi administrasi.
+        </p>
+       </div>
+      </div>
+      <div class="table-responsive">
+       <table class="table align-middle">
+        <thead>
+         <tr>
+          <th>
+           Periode
+          </th>
+          <th>
+           Total Kuota
+          </th>
+          <th>
+           Diterima
+          </th>
+          <th>
+           Menunggu
+          </th>
+          <th>
+           Ditolak
+          </th>
+          <th>
+           Selesai
+          </th>
+          <th>
+           Sisa Kuota
+          </th>
+          <th>
+           Keterisian
+          </th>
+         </tr>
+        </thead>
+        <tbody id="reportTable">
+        </tbody>
+       </table>
+      </div>
+     </article>
+     <p class="muted report-note">
+      <i class="bi bi-shield-lock">
+      </i>
+      Gunakan hanya data yang telah disetujui. Ekspor CSV berisi data yang dipilih dan harus disimpan sesuai kebijakan dinas.
+     </p>
+    </section>
+    <footer class="footer">
+     SIM Magang &middot; Prototipe internal &middot; Dinas Pertanian dan Ketahanan Pangan Kabupaten Bantul
+    </footer>
+   </main>
+  </div>
+  <!-- Participant modal -->
+  <div aria-hidden="true" class="modal fade" id="participantModal" tabindex="-1">
+   <div class="modal-dialog modal-dialog-centered">
+    <form class="modal-content" id="participantForm">
+     <div class="modal-header">
+      <div>
+       <h5 class="modal-title" id="participantModalTitle">
+        Tambah Peserta
+       </h5>
+       <p class="modal-subtitle">
+        Isi informasi peserta magang.
+       </p>
+      </div>
+      <button aria-label="Tutup" class="btn-close" data-bs-dismiss="modal" type="button">
+      </button>
+     </div>
+     <div class="modal-body">
+      <input id="participantId" type="hidden"/>
+      <div class="mb-3">
+       <label class="form-label" for="participantName">
+        Nama peserta
+        <span class="required">
+         *
+        </span>
+       </label>
+       <input class="form-control" id="participantName" maxlength="100" placeholder="Nama lengkap" required=""/>
+      </div>
+      <div class="mb-3">
+       <label class="form-label" for="participantCampus">
+        Perguruan tinggi
+        <span class="required">
+         *
+        </span>
+       </label>
+       <input class="form-control" id="participantCampus" maxlength="120" placeholder="Nama kampus" required=""/>
+      </div>
+      <div class="mb-3">
+       <label class="form-label" for="participantMajor">
+        Jurusan / program studi
+       </label>
+       <input class="form-control" id="participantMajor" maxlength="100" placeholder="Contoh: Sistem Informasi"/>
+      </div>
+      <div class="mb-3">
+       <label class="form-label" for="participantPeriod">
+        Periode magang
+        <span class="required">
+         *
+        </span>
+       </label>
+       <select class="form-select" id="participantPeriod" required="">
+       </select>
+      </div>
+      <div class="mb-3">
+       <label class="form-label" for="participantStatus">
+        Status
+        <span class="required">
+         *
+        </span>
+       </label>
+       <select class="form-select" id="participantStatus" required="">
+        <option>
+         Menunggu
+        </option>
+        <option>
+         Diterima
+        </option>
+        <option>
+         Ditolak
+        </option>
+        <option>
+         Selesai
+        </option>
+       </select>
+       <div class="form-text">
+        Peserta berstatus Diterima atau Selesai dihitung sebagai penggunaan kuota.
+       </div>
+      </div>
+     </div>
+     <div class="modal-footer">
+      <button class="btn btn-light" data-bs-dismiss="modal" type="button">
+       Batal
+      </button>
+      <button class="btn btn-green" type="submit">
+       Simpan Peserta
+      </button>
+     </div>
+    </form>
+   </div>
+  </div>
+  <!-- Period modal -->
+  <div aria-hidden="true" class="modal fade" id="periodModal" tabindex="-1">
+   <div class="modal-dialog modal-dialog-centered">
+    <form class="modal-content" id="periodForm">
+     <div class="modal-header">
+      <div>
+       <h5 class="modal-title" id="periodModalTitle">
+        Tambah Periode
+       </h5>
+       <p class="modal-subtitle">
+        Tentukan periode dan kuota yang disetujui.
+       </p>
+      </div>
+      <button aria-label="Tutup" class="btn-close" data-bs-dismiss="modal" type="button">
+      </button>
+     </div>
+     <div class="modal-body">
+      <input id="periodId" type="hidden"/>
+      <div class="mb-3">
+       <label class="form-label" for="periodName">
+        Nama periode
+        <span class="required">
+         *
+        </span>
+       </label>
+       <input class="form-control" id="periodName" maxlength="80" placeholder="Contoh: Oktober 2026" required=""/>
+      </div>
+      <div class="row">
+       <div class="col-6 mb-3">
+        <label class="form-label" for="periodStart">
+         Tanggal mulai
+         <span class="required">
+          *
+         </span>
+        </label>
+        <input class="form-control" id="periodStart" required="" type="date"/>
+       </div>
+       <div class="col-6 mb-3">
+        <label class="form-label" for="periodEnd">
+         Tanggal selesai
+         <span class="required">
+          *
+         </span>
+        </label>
+        <input class="form-control" id="periodEnd" required="" type="date"/>
+       </div>
+      </div>
+      <div class="mb-3">
+       <label class="form-label" for="periodQuota">
+        Kuota
+        <span class="required">
+         *
+        </span>
+       </label>
+       <input class="form-control" id="periodQuota" max="10000" min="0" required="" type="number" value="10"/>
+      </div>
+      <div class="mb-3">
+       <label class="form-label" for="periodStatus">
+        Status periode
+       </label>
+       <select class="form-select" id="periodStatus">
+        <option>
+         Aktif
+        </option>
+        <option>
+         Belum dibuka
+        </option>
+        <option>
+         Ditutup
+        </option>
+       </select>
+      </div>
+     </div>
+     <div class="modal-footer">
+      <button class="btn btn-light" data-bs-dismiss="modal" type="button">
+       Batal
+      </button>
+      <button class="btn btn-green" type="submit">
+       Simpan Periode
+      </button>
+     </div>
+    </form>
+   </div>
+  </div>
+  <div class="toast-container position-fixed bottom-0 end-0 p-3">
+   <div class="toast align-items-center border-0" id="appToast" role="status">
+    <div class="d-flex">
+     <div class="toast-body" id="toastMessage">
+      Berhasil
+     </div>
+     <button aria-label="Tutup" class="btn-close me-2 m-auto" data-bs-dismiss="toast" type="button">
+     </button>
+    </div>
+   </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js">
+  </script>
+  <script src="app.js">
+  </script>
+ </body>
+</html>
+
